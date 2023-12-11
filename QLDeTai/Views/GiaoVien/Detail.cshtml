@@ -1,0 +1,91 @@
+﻿
+@model QLDeTai.Models.EF.GiaoVien
+@{
+    ViewBag.Title = "Thông tin chi tiết";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<nav class="navbar navbar-example navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbar-ex-2">
+            <div class="navbar-nav me-auto">
+                <a class="nav-item nav-link " href="/home">Trang chủ</a>
+                <a class="nav-item nav-link " href="/giao-vien">Giáo viên</a>
+                <a class="nav-item nav-link active" href="#">Thông tin chi tiết</a>
+            </div>
+            <span class="navbar-text">@ViewBag.Title</span>
+        </div>
+    </div>
+</nav>
+
+<div class="row">
+    <!-- Inline text elements -->
+    <div class="col">
+        <div class="card mb-4">
+            <h5 class="card-header">Thông tin chi tiết</h5>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td class="align-middle"> Tên Giáo Viên</td>
+                            <td class="py-3">
+                                <p class="mb-0" > @Model.TenGV </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle"> Mã Cán Bộ</td>
+                            <td class="py-3">
+                                <p class="mb-0"> @Model.MaCB </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle"> Số điện thoại</td>
+                            <td class="py-3">
+                                <p class="mb-0"> @Model.SDT </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle"> Email</td>
+                            <td class="py-3">
+                                <p class="mb-0"> @Model.Email </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle"> Học hàm</td>
+                            <td class="py-3">
+                                <p class="mb-0"> @Model.HocHam </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle"> Chức vụ</td>
+                            <td class="py-3">
+                                <p class="mb-0"> @Model.ChucVu </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle"> Cấp bậc</td>
+                            <td class="py-3">
+                                <p class="mb-0"> @Model.CapBac </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle"> Bộ môn</td>
+                            <td class="py-3">
+                                <p class="mb-0"> @Model.BoMon </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle"> Khoa/Viện</td>
+                            <td class="py-3">
+                                <p class="mb-0"> @Model.DonViGV.KhoaVien </p>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

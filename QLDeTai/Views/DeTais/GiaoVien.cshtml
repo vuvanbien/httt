@@ -1,0 +1,45 @@
+﻿@model QLDeTai.Models.EF.DeTai
+
+
+<div class="card">
+   
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tên giáo viên</th>
+                        <th>Số điện thoại</th>
+                        <th>Học hàm/Học vị</th>
+                        <th>Cấp bậc</th>
+                        <th>Bộ môn</th>
+                        <th>Khoa/Viện</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.GiaoVien.TenGV)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.GiaoVien.SDT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.GiaoVien.HocHam)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => model.GiaoVien.CapBac)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.GiaoVien.BoMon)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.GiaoVien.DonViGV.KhoaVien)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,135 @@
+﻿@model PagedList.PagedList<QLDeTai.Models.EF.DonViHV>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách Tiểu đoàn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="navbar navbar-example navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbar-ex-2">
+            <div class="navbar-nav me-auto">
+                <a class="nav-item nav-link " href="/home">Trang chủ</a>
+                <a class="nav-item nav-link active" href="/TieuDoan">Tiểu đoàn</a>
+            </div>
+
+            <span class="navbar-text">@ViewBag.Title</span>
+        </div>
+    </div>
+</nav>
+
+
+<div class="card">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="card-header m-0">@ViewBag.Tittel</h5>
+        <a href="/TieuDoan/Add" class="btn btn-outline-primary" style="margin-right: 40px;">Thêm mới</a>
+    </div>
+
+    <div class=" text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">STT</th>
+                    <th class="text-center">Tiểu đoàn</th>   
+                    <th class="text-center">Mô tả</th>
+                    <th  class="text-center">#</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @if (Model != null && Model.Any())
+                {
+                    int stt = 1;
+                    var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+                    foreach (var item in Model)
+                    {
+                        <tr id="trow_@item.id">
+                            <td class="text-center">@stt</td>
+                            <td class="text-center"><i class="fab fa-angular fa-lg text-danger me-3 "></i> <strong>@item.TieuDoan</strong></td>
+                            <td class="text-center"><i class="fab fa-angular fa-lg text-danger me-3 "></i> <strong>@item.MoTa</strong></td>
+                            <td class="text-center">
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        @*<a class="dropdown-item" href="/GiaoVien/Detail/@item.Id"><i class="bx bx-edit-alt me-1"></i> Chi tiết</a>*@
+                                        <a class="dropdown-item" href="/TieuDoan/edit/@item.id"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
+                                        <a class="dropdown-item btnDelete" href="#" data-id="@item.id"><i class="bx bx-trash me-1 "></i> Xoá</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        stt++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>Không có bản ghi nào</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    @*<div>
+            <ul class="pagination">
+                <li class="page-item first">
+                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-left"></i></a>
+                </li>
+                <li class="page-item prev">
+                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-left"></i></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);">2</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="javascript:void(0);">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);">4</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);">5</a>
+                </li>
+                <li class="page-item next">
+                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-right"></i></a>
+                </li>
+                <li class="page-item last">
+                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-right"></i></a>
+                </li>
+            </ul>
+        </div>*@
+</div>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+
+
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm('Bạn có muốn xóa bản ghi này không?');
+                if (conf === true) {
+                    $.ajax({
+                        url: '/TieuDoan/Delete',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
+                        }
+                    });
+                }
+            });
+
+
+        });
+    </script>
+}

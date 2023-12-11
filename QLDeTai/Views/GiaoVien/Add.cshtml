@@ -1,0 +1,139 @@
+﻿@model QLDeTai.Models.EF.GiaoVien
+
+@{
+    ViewBag.Title = "Thêm mới giáo viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<nav class="navbar navbar-example navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbar-ex-2">
+            <div class="navbar-nav me-auto">
+                <a class="nav-item nav-link " href="/home">Trang chủ</a>
+                <a class="nav-item nav-link " href="/giao-vien">Giáo viên</a>
+                <a class="nav-item nav-link active" href="#">Thêm mới</a>
+            </div>
+
+            <span class="navbar-text">@ViewBag.Title</span>
+        </div>
+    </div>
+</nav>
+
+<div class="col-xxl">
+    <div class="card mb-4">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="mb-0">Nhập thông tin</h5>
+            <small class="text-muted float-end">Vui lòng nhập đầy đủ</small>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Add", "GiaoVien", FormMethod.Post, new { }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <form>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Họ Tên</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                @Html.TextBoxFor(x => x.TenGV, new { @class = "form-control", @placeholder = "Nguyên Văn A", @maxlength = "50" })
+                                @Html.ValidationMessageFor(x => x.TenGV, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Mã Cán bộ</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+                                @Html.TextBoxFor(x => x.MaCB, new { @class = "form-control", @placeholder = "Mã Cán bộ" })
+                                @Html.ValidationMessageFor(x => x.MaCB, null, new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-email">Email</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
+                                <span id="basic-icon-default-email2" class="input-group-text">user&commat;example.com</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 form-label" for="basic-icon-default-phone">Số điện thoại</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bx-phone"></i></span>
+                                @Html.TextBoxFor(x => x.SDT, new { @class = "form-control", @placeholder = "0979979027" })
+                                @Html.ValidationMessageFor(x => x.SDT, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Học hàm</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                @Html.TextBoxFor(x => x.HocHam, new { @class = "form-control", @placeholder = "Tiến sĩ" })
+                                @Html.ValidationMessageFor(x => x.HocHam, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Chức vụ</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                @Html.TextBoxFor(x => x.ChucVu, new { @class = "form-control", @placeholder = "Giáo viên chính" })
+                                @Html.ValidationMessageFor(x => x.ChucVu, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Cấp bậc</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                @Html.TextBoxFor(x => x.CapBac, new { @class = "form-control", @placeholder = "Trung tá" })
+                                @Html.ValidationMessageFor(x => x.CapBac, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Bộ môn</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                @Html.TextBoxFor(x => x.BoMon, new { @class = "form-control", @placeholder = "Công nghệ phần mềm" })
+                                @Html.ValidationMessageFor(x => x.BoMon, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Khoa/Viện</label>
+                        <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                @Html.DropDownListFor(x => x.IdDonVi, ViewBag.DonViGV as SelectList, "-Chọn Khoa/Viện-", new { @class = "form-control", @placeholder = "V4" })
+                                @Html.ValidationMessageFor(x => x.IdDonVi, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Đăng ký</button>
+                        </div>
+                    </div>
+                </form>
+            }
+            </div>
+    </div>
+</div>

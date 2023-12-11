@@ -1,0 +1,119 @@
+﻿@model QLDeTai.Models.EF.DeTai
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    h2 {
+        text-align: center;
+    }
+</style>
+<h2>Thông tin chi tiết đề tài</h2>
+<div class="demo-inline-spacing mt-3">
+    <div class="list-group list-group-horizontal-md text-md-center">
+        <a class="list-group-item list-group-item-action" id="home-list-item" data-bs-toggle="list" href="#horizontal-home">Thông tin đề tài</a>
+        <a class="list-group-item list-group-item-action" id="profile-list-item" data-bs-toggle="list" href="#horizontal-profile">Giáo viên hướng dẫn</a>
+        <a class="list-group-item list-group-item-action" id="messages-list-item" data-bs-toggle="list" href="#horizontal-messages">Học viên tham gia</a>
+
+    </div>
+    <div class="tab-content px-0 mt-0">
+        <div class="tab-pane fade" id="horizontal-home">
+            <dl class="dl-horizontal">
+                <dt>
+                    Mã đề tài
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
+                <dt>
+                    Tên đề tài
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TenDeTai)
+                </dd>
+                <dt>
+                    Mục tiêu nghiên cứu
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MucTieu)
+                </dd>
+                <dt>
+                    Nội dung nghiên cứu
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NoiDung)
+                </dd>
+                <dt>
+                    Ghi chú
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GhiChu)
+                </dd>
+                <dt>
+                    Ngày đăng kí
+                </dt>
+                <dd>
+                    @Model.NgayDK.ToString("dd-MM-yyyy")
+                </dd>
+                <dt>
+                    Ngày cập nhật
+                </dt>
+                <dd>
+                    @Model.NgayCapNhap.ToString("dd-MM-yyyy")
+                </dd>
+                <dt>
+                    Năm học
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NamHoc)
+                </dd>
+                <dt>
+                    Điểm
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Diem)
+                </dd>
+                <dt>
+                    Khen Thưởng
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.KhenThuong)
+                </dd>
+                <dt>
+                    Tiểu ban
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TieuBan.TenTieuBan)
+                </dd>
+                <dt>
+                    Trạng thái
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TrangThai.TenTrangThai)
+                </dd>
+            </dl>
+        </div>
+        <div class="tab-pane fade" id="horizontal-profile">
+            @{
+                Html.RenderPartial("GiaoVien");
+            }
+        </div>
+        <div class="tab-pane fade" id="horizontal-messages">
+            @{
+                Html.RenderPartial("HocVien", Model.HocViens);
+            }
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <a type="button" class="btn btn-secondary" href="@Url.Action("Index", "QLDeTais")">Quay lại</a>
+</div>

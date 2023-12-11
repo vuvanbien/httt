@@ -1,0 +1,40 @@
+﻿@model IEnumerable<QLDeTai.Models.EF.HocVien>
+<div class="card">
+
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Mã Học viên</th>
+                        <th>Tên Học viên</th>
+                        <th>Khóa</th>
+                        <th>Lớp</th>
+                        <th>Điểm TBC</th>
+                        <th>Đại Đội</th>
+                        <th>Tiểu đoàn</th>
+                        <th>Vai trò</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var hocVien in Model)
+                    {
+                        <tr>
+                            <td>@hocVien.MaHV</td>
+                            <td>@hocVien.TenHV</td>
+                            <td>@hocVien.Khoa</td>
+                            <td>@hocVien.Lop</td>
+                            <td>@hocVien.DiemTBC</td>
+                            <td>@hocVien.DaiDoi</td>
+                            <td>@hocVien.DonViHV.TieuDoan</td>
+                            <td>@(hocVien.TruongNhom ? "Trưởng nhóm" : "Thành viên")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

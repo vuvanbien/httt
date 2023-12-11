@@ -1,0 +1,148 @@
+﻿@model PagedList.PagedList<QLDeTai.Models.EF.HocVien>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Thông tin học viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="navbar navbar-example navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbar-ex-2">
+            <div class="navbar-nav me-auto">
+                <a class="nav-item nav-link " href="/home">Trang chủ</a>
+                <a class="nav-item nav-link active" href="/HocVien">Học viên</a>
+            </div>
+
+            <span class="navbar-text">@ViewBag.Title</span>
+        </div>
+    </div>
+</nav>
+
+
+<div class="card">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5 class="card-header m-0">Danh sách Học viên</h5>
+        <a href="/HocVien/Add" class="btn btn-outline-primary" style="margin-right: 40px;">Thêm mới</a>
+    </div>
+
+    <div class=" text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Họ Tên</th>
+                    <th>Mã HV</th>
+                    <th>Lớp</th>
+                    <th>Đại đội</th>
+                    <th>Năm thực hiện</th>
+                    <th>Trưởng Nhóm</th>
+                    <th>Mã Đề Tài</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @if (Model != null && Model.Any())
+                {
+                    int stt = 1;
+                    var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+                    foreach (var item in Model)
+                    {
+                        <tr id="trow_@item.Id">
+                            <td>@stt</td>
+                            <td><i class="fab fa-angular fa-lg text-danger me-3 "></i> <strong>@item.TenHV</strong></td>
+                            <td>@item.MaHV</td>
+                            <td>@item.Lop</td>
+                            <td>@item.DaiDoi</td>
+                            <td>@item.DeTai.NamHoc</td>
+                            <td>@(item.TruongNhom ? "Trưởng nhóm" : "Thành viên")</td>
+                            <td>@item.DeTai.Id</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        @*<a class="dropdown-item" href="/GiaoVien/Detail/@item.Id"><i class="bx bx-edit-alt me-1"></i> Chi tiết</a>*@
+                                        <a class="dropdown-item" href="/HocVien/edit/@item.Id"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
+                                        <a class="dropdown-item btnDelete" href="#" data-id="@item.Id"><i class="bx bx-trash me-1 "></i> Xoá</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        stt++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>Không có bản ghi nào</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    @*<div>
+            <ul class="pagination">
+                <li class="page-item first">
+                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-left"></i></a>
+                </li>
+                <li class="page-item prev">
+                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-left"></i></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);">2</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="javascript:void(0);">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);">4</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0);">5</a>
+                </li>
+                <li class="page-item next">
+                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-right"></i></a>
+                </li>
+                <li class="page-item last">
+                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-right"></i></a>
+                </li>
+            </ul>
+        </div>*@
+</div>
+<div id="dialog">
+    <iframe id="myIframe" style="border: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+
+
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm('Bạn có muốn xóa bản ghi này không?');
+                if (conf === true) {
+                    $.ajax({
+                        url: '/HocVien/Delete',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
+                        }
+                    });
+                }
+            });
+
+
+        });
+    </script>
+}
